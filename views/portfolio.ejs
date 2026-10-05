@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= titulo %></title>
+    <meta name="description" content="Portfólio da Tech Next Pro — sites, sistemas web e soluções personalizadas em tecnologia.">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        .portfolio-page-hero {
+            position: relative;
+            padding: 150px 0 95px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 78% 35%, rgba(0,119,255,.18), transparent 32%),
+                radial-gradient(circle at 15% 60%, rgba(0,217,255,.07), transparent 28%),
+                var(--bg);
+        }
+        .portfolio-page-hero::after {
+            content:"";
+            position:absolute;
+            inset:0;
+            opacity:.12;
+            background-image:linear-gradient(rgba(0,217,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(0,217,255,.08) 1px,transparent 1px);
+            background-size:70px 70px;
+            mask-image:linear-gradient(to bottom,black,transparent);
+        }
+        .portfolio-hero-content { position:relative; z-index:2; max-width:850px; }
+        .portfolio-hero-content h1 { margin-top:22px; font-size:clamp(44px,6vw,72px); line-height:1.02; letter-spacing:-3.5px; }
+        .portfolio-hero-content h1 span {
+            background:linear-gradient(100deg,var(--blue),var(--cyan));
+            -webkit-background-clip:text; background-clip:text; color:transparent;
+        }
+        .portfolio-hero-content p { max-width:680px; margin-top:24px; color:var(--text); font-size:17px; line-height:1.8; }
+        .portfolio-stats { display:flex; gap:14px; margin-top:35px; flex-wrap:wrap; }
+        .portfolio-stat { padding:13px 17px; border:1px solid rgba(0,217,255,.12); border-radius:12px; background:rgba(255,255,255,.025); }
+        .portfolio-stat strong { display:block; color:var(--white); font-size:16px; }
+        .portfolio-stat span { color:var(--text); font-size:10px; }
+        .projects-section { background:var(--bg-secondary); }
+        .projects-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
+        .project-card {
+            position:relative; overflow:hidden; border:1px solid rgba(0,217,255,.11); border-radius:20px;
+            background:linear-gradient(145deg,rgba(9,24,41,.92),rgba(3,9,16,.97)); transition:.35s ease;
+        }
+        .project-card:hover { transform:translateY(-7px); border-color:rgba(0,217,255,.3); box-shadow:0 25px 70px rgba(0,0,0,.28); }
+        .project-preview {
+            min-height:230px; padding:22px; display:flex; flex-direction:column; justify-content:space-between;
+            background:radial-gradient(circle at 80% 20%,rgba(0,217,255,.2),transparent 32%),linear-gradient(135deg,#0a2137,#030910);
+        }
+        .project-preview.system { background:radial-gradient(circle at 20% 20%,rgba(0,119,255,.25),transparent 35%),linear-gradient(135deg,#071a2c,#030910); }
+        .project-preview.collect { background:radial-gradient(circle at 80% 70%,rgba(0,217,255,.18),transparent 35%),linear-gradient(135deg,#0b1726,#030910); }
+        .project-preview.web { background:radial-gradient(circle at 30% 70%,rgba(0,119,255,.2),transparent 35%),linear-gradient(135deg,#081d31,#030910); }
+        .preview-top { display:flex; justify-content:space-between; color:#72869a; font-size:9px; font-weight:800; letter-spacing:1.5px; }
+        .preview-icon { width:58px; height:58px; display:flex; align-items:center; justify-content:center; border:1px solid rgba(0,217,255,.2); border-radius:15px; color:var(--cyan); background:rgba(0,119,255,.1); font-size:21px; font-weight:800; }
+        .preview-title { font-size:25px; font-weight:800; max-width:430px; }
+        .preview-title span { display:block; color:var(--cyan); }
+        .project-content { padding:27px; }
+        .project-category { color:var(--cyan); font-size:10px; font-weight:800; letter-spacing:2px; }
+        .project-content h3 { margin-top:8px; font-size:23px; }
+        .project-content p { margin-top:11px; color:var(--text); font-size:13px; line-height:1.8; }
+        .tech-list { display:flex; flex-wrap:wrap; gap:7px; margin-top:18px; }
+        .tech-list span { padding:6px 9px; border:1px solid rgba(0,217,255,.11); border-radius:6px; color:var(--silver); background:rgba(0,217,255,.04); font-size:9px; }
+        .project-status { display:inline-flex; align-items:center; gap:6px; margin-top:20px; color:#8da0b2; font-size:10px; }
+        .project-status i { width:6px; height:6px; border-radius:50%; background:var(--cyan); box-shadow:0 0 9px var(--cyan); }
+        .portfolio-process { background:var(--bg); }
+        .process-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+        .process-card { padding:28px; border:1px solid rgba(0,217,255,.09); border-radius:17px; background:rgba(255,255,255,.02); }
+        .process-number { color:var(--cyan); font-size:11px; font-weight:800; letter-spacing:2px; }
+        .process-card h3 { margin-top:15px; font-size:18px; }
+        .process-card p { margin-top:8px; color:var(--text); font-size:13px; line-height:1.7; }
+        .portfolio-cta { padding:90px 0; background:var(--bg-secondary); }
+        @media(max-width:800px) {
+            .projects-grid,.process-grid { grid-template-columns:1fr; }
+            .portfolio-page-hero { padding:125px 0 75px; }
+            .portfolio-hero-content h1 { letter-spacing:-2.5px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="container header-content">
+        <a href="/" class="logo-link">
+            <img src="/images/logo-header.png" alt="Tech Next Pro" class="logo">
+        </a>
+        <nav class="nav">
+            <a href="/">Início</a>
+            <a href="/servicos">Serviços</a>
+            <a href="/produtos">Produtos</a>
+            <a href="/sites">Criação de Sites</a>
+            <a href="/portfolio" class="active">Portfólio</a>
+            <a href="/sobre">Sobre</a>
+            <a href="/contato" class="nav-contact">Contato</a>
+        </nav>
+        <button class="menu-button" aria-label="Abrir menu">☰</button>
+    </div>
+</header>
+
+<main>
+
+<section class="portfolio-page-hero">
+    <div class="container portfolio-hero-content">
+        <span class="hero-badge"><span class="status-dot"></span> PROJETOS E SOLUÇÕES</span>
+        <h1>Projetos que transformam<br><span>ideias em tecnologia.</span></h1>
+        <p>
+            Conheça alguns dos projetos desenvolvidos pela Tech Next Pro.
+            Criamos sites, sistemas web e soluções personalizadas para diferentes
+            necessidades.
+        </p>
+        <div class="portfolio-stats">
+            <div class="portfolio-stat"><strong>Web</strong><span>Sites profissionais</span></div>
+            <div class="portfolio-stat"><strong>Systems</strong><span>Sistemas personalizados</span></div>
+            <div class="portfolio-stat"><strong>Custom</strong><span>Soluções sob medida</span></div>
+        </div>
+    </div>
+</section>
+
+<section class="section projects-section">
+    <div class="container">
+        <div class="section-heading">
+            <span class="section-label">PROJETOS EM DESTAQUE</span>
+            <h2>Desenvolvimento com <span>propósito.</span></h2>
+            <p>Cada projeto é pensado para resolver uma necessidade real, com tecnologia, organização e uma experiência profissional.</p>
+        </div>
+
+        <div class="projects-grid">
+
+            <article class="project-card">
+                <div class="project-preview system">
+                    <div class="preview-top"><span>SISTEMA WEB</span><span>01</span></div>
+                    <div class="preview-icon">&lt;/&gt;</div>
+                    <div class="preview-title">Busca de Registros <span>de Fiéis</span></div>
+                </div>
+                <div class="project-content">
+                    <span class="project-category">GESTÃO E REGISTROS</span>
+                    <h3>Paróquia São José — Carpina</h3>
+                    <p>
+                        Sistema desenvolvido para organizar e facilitar a busca de
+                        registros de sacramentos, pessoas e documentos da paróquia.
+                    </p>
+                    <div class="tech-list">
+                        <span>Node.js</span><span>Express</span><span>EJS</span><span>SQLite</span><span>OCR</span>
+                    </div>
+                    <div class="project-status"><i></i> Sistema personalizado</div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-preview collect">
+                    <div class="preview-top"><span>GESTÃO</span><span>02</span></div>
+                    <div class="preview-icon">⚙</div>
+                    <div class="preview-title">Sistema de <span>Coleta</span></div>
+                </div>
+                <div class="project-content">
+                    <span class="project-category">SISTEMA DE GESTÃO</span>
+                    <h3>Sistema de Coleta</h3>
+                    <p>
+                        Plataforma web para cadastro e organização de informações,
+                        com autenticação e diferentes níveis de acesso.
+                    </p>
+                    <div class="tech-list">
+                        <span>Node.js</span><span>Express</span><span>EJS</span><span>SQLite</span><span>RBAC</span>
+                    </div>
+                    <div class="project-status"><i></i> Sistema personalizado</div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-preview web">
+                    <div class="preview-top"><span>DESENVOLVIMENTO WEB</span><span>03</span></div>
+                    <div class="preview-icon">✦</div>
+                    <div class="preview-title">Sites <span>Personalizados</span></div>
+                </div>
+                <div class="project-content">
+                    <span class="project-category">WEB DESIGN & DEVELOPMENT</span>
+                    <h3>Sites para empresas e profissionais</h3>
+                    <p>
+                        Desenvolvimento de páginas modernas, responsivas e alinhadas
+                        à identidade de cada negócio, com foco em presença digital.
+                    </p>
+                    <div class="tech-list">
+                        <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Node.js</span><span>EJS</span>
+                    </div>
+                    <div class="project-status"><i></i> Desenvolvimento sob medida</div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-preview">
+                    <div class="preview-top"><span>SOLUÇÕES DIGITAIS</span><span>04</span></div>
+                    <div class="preview-icon">+</div>
+                    <div class="preview-title">Seu projeto <span>pode estar aqui.</span></div>
+                </div>
+                <div class="project-content">
+                    <span class="project-category">PRÓXIMO PROJETO</span>
+                    <h3>Vamos construir sua solução</h3>
+                    <p>
+                        Precisa de um site, sistema ou ferramenta personalizada?
+                        A Tech Next Pro desenvolve a solução de acordo com seu objetivo.
+                    </p>
+                    <div class="tech-list">
+                        <span>Sites</span><span>Sistemas</span><span>Automação</span><span>Web</span>
+                    </div>
+                    <a href="https://wa.me/5581999606951?text=Ol%C3%A1%21%20Vim%20pelo%20portf%C3%B3lio%20da%20Tech%20Next%20Pro%20e%20quero%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top:20px;">
+                        Falar sobre meu projeto <span>→</span>
+                    </a>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<section class="section portfolio-process">
+    <div class="container">
+        <div class="section-heading">
+            <span class="section-label">COMO DESENVOLVEMOS</span>
+            <h2>Do primeiro contato ao <span>projeto pronto.</span></h2>
+            <p>Um processo organizado para transformar sua necessidade em uma solução digital profissional.</p>
+        </div>
+
+        <div class="process-grid">
+            <article class="process-card">
+                <span class="process-number">01 — ENTENDIMENTO</span>
+                <h3>Entendemos sua necessidade</h3>
+                <p>Conversamos sobre seu objetivo, público, funcionalidades e o resultado que você espera.</p>
+            </article>
+            <article class="process-card">
+                <span class="process-number">02 — DESENVOLVIMENTO</span>
+                <h3>Criamos a solução</h3>
+                <p>Desenvolvemos o projeto com foco em qualidade, responsividade, organização e facilidade de uso.</p>
+            </article>
+            <article class="process-card">
+                <span class="process-number">03 — ENTREGA</span>
+                <h3>Colocamos no ar</h3>
+                <p>Após os ajustes e validações, o projeto pode ser publicado e acompanhado conforme a necessidade.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="portfolio-cta">
+    <div class="container">
+        <div class="cta-box">
+            <div>
+                <span class="section-label">SEU PROJETO PODE SER O PRÓXIMO</span>
+                <h2>Tem uma ideia? Vamos desenvolver.</h2>
+                <p>Fale com a Tech Next Pro e conte o que você precisa.</p>
+            </div>
+            <a href="https://wa.me/5581999606951?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Tech%20Next%20Pro%20e%20quero%20falar%20sobre%20um%20novo%20projeto." target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                Falar no WhatsApp <span>→</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer class="footer">
+    <div class="container footer-content">
+        <div class="footer-brand">
+            <img src="/images/logo-header.png" alt="Tech Next Pro">
+            <p>Soluções em tecnologia para pessoas, empresas e projetos.</p>
+        </div>
+        <div class="footer-links">
+            <h3>Navegação</h3>
+            <a href="/">Início</a><a href="/servicos">Serviços</a><a href="/produtos">Produtos</a><a href="/sites">Criação de Sites</a><a href="/portfolio">Portfólio</a>
+        </div>
+        <div class="footer-links">
+            <h3>Contato</h3>
+            <a href="/contato">Fale conosco</a>
+            <a href="https://wa.me/5581999606951" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            <a href="https://www.instagram.com/tech.nextpro/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container"><p>© <%= new Date().getFullYear() %> Tech Next Pro. Todos os direitos reservados.</p></div>
+    </div>
+</footer>
+
+<script src="/script.js"></script>
+</body>
+</html>
