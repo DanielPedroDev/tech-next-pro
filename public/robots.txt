@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tech-next-pro.onrender.com/sitemap.xml
+Sitemap: https://technextpro.com.br/sitemap.xml
