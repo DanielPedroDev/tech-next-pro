@@ -19,6 +19,17 @@ app.set('views', path.join(__dirname, 'views'));
 // Arquivos públicos
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Sitemap e robots.txt — rotas explícitas para mecanismos de busca
+app.get('/sitemap.xml', (req, res) => {
+    res.type('application/xml');
+    res.sendFile(path.join(__dirname, 'public', 'sitemap.xml'));
+});
+
+app.get('/robots.txt', (req, res) => {
+    res.type('text/plain');
+    res.sendFile(path.join(__dirname, 'public', 'robots.txt'));
+});
+
 // Processamento de dados
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
