@@ -2984,3 +2984,267 @@ button {
         height: 175px;
     }
 }
+
+
+/* =========================================================
+   REFINO MOBILE — NAVEGAÇÃO, LEITURA E TOQUE
+   ========================================================= */
+
+img, video, iframe, canvas, svg {
+    max-width: 100%;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 82px;
+}
+
+body {
+    min-width: 320px;
+}
+
+button, a, input, select, textarea {
+    touch-action: manipulation;
+}
+
+@media (max-width: 760px) {
+    html {
+        scroll-padding-top: 70px;
+    }
+
+    .header-content {
+        gap: 12px;
+    }
+
+    .logo {
+        width: clamp(112px, 36vw, 145px);
+    }
+
+    .menu-button {
+        width: 44px;
+        height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        border: 1px solid rgba(0, 217, 255, .22);
+        border-radius: 10px;
+        background: rgba(0, 217, 255, .06);
+        font-size: 27px;
+        line-height: 1;
+    }
+
+    /* O menu agora abre como um painel legível no celular. */
+    .nav.mobile-open {
+        position: absolute;
+        top: calc(100% + 1px);
+        left: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 10px 18px 18px;
+        background: rgba(3, 7, 13, .98);
+        border-bottom: 1px solid rgba(0, 217, 255, .2);
+        box-shadow: 0 18px 35px rgba(0, 0, 0, .35);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+    }
+
+    .nav.mobile-open a {
+        display: flex;
+        align-items: center;
+        min-height: 48px;
+        padding: 12px 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, .06);
+        font-size: 15px;
+    }
+
+    .nav.mobile-open .nav-contact {
+        justify-content: center;
+        margin-top: 10px;
+        border: 1px solid rgba(0, 217, 255, .35);
+    }
+
+    .hero,
+    .page-hero,
+    .sites-hero {
+        min-height: auto;
+        padding-top: 105px;
+        padding-bottom: 58px;
+    }
+
+    .hero h1,
+    .page-hero h1 {
+        max-width: 100%;
+        font-size: clamp(34px, 9vw, 46px);
+        line-height: 1.06;
+        letter-spacing: -1.8px;
+        overflow-wrap: anywhere;
+    }
+
+    .sites-hero-text h1 {
+        font-size: clamp(34px, 9vw, 45px);
+        line-height: 1.06;
+        letter-spacing: -1.8px;
+    }
+
+    .hero-description,
+    .page-hero p,
+    .section-heading p {
+        font-size: 15px;
+        line-height: 1.75;
+    }
+
+    .hero-buttons,
+    .page-hero .hero-buttons {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 11px;
+        width: 100%;
+    }
+
+    .hero-buttons .btn,
+    .page-hero .btn,
+    .sites-cta .btn,
+    .cta-box .btn {
+        width: 100%;
+        min-height: 48px;
+    }
+
+    .section {
+        padding: 58px 0;
+    }
+
+    .section-heading {
+        margin-bottom: 30px;
+    }
+
+    .section-heading h2,
+    .products-text h2,
+    .web-content h2,
+    .sites-cta h2 {
+        font-size: clamp(27px, 7vw, 36px);
+        line-height: 1.12;
+        letter-spacing: -.8px;
+        overflow-wrap: anywhere;
+    }
+
+    .services-grid,
+    .portfolio-grid,
+    .products-cards,
+    .deliver-grid,
+    .sites-portfolio-grid,
+    .why-site-grid,
+    .site-types-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .service-card,
+    .product-card,
+    .portfolio-card,
+    .deliver-card,
+    .why-site-card,
+    .site-type-card {
+        min-width: 0;
+        padding: 22px;
+    }
+
+    .products-layout,
+    .web-content,
+    .process-header {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 28px;
+    }
+
+    .products-image,
+    .hero-logo,
+    .website-mockup,
+    .browser-window {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .browser-window {
+        overflow: hidden;
+    }
+
+    .mockup-content {
+        min-height: 250px;
+        padding: 14px;
+    }
+
+    .mockup-hero {
+        min-height: 190px;
+        padding: 18px;
+    }
+
+    .mockup-hero h3 {
+        font-size: clamp(19px, 6vw, 27px);
+    }
+
+    .mockup-cards {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .sites-cta {
+        gap: 24px;
+        padding: 28px 22px;
+        border-radius: 18px;
+    }
+
+    .process-line {
+        gap: 28px;
+    }
+
+    .footer-content {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 28px;
+        padding: 40px 0;
+    }
+
+    .footer-content > * {
+        min-width: 0;
+    }
+
+    .container,
+    .header-content,
+    .hero-content,
+    .page-hero .container {
+        min-width: 0;
+    }
+
+    p, h1, h2, h3, a, span {
+        overflow-wrap: break-word;
+    }
+}
+
+@media (max-width: 380px) {
+    .container {
+        width: calc(100% - 24px);
+    }
+
+    .hero h1,
+    .page-hero h1,
+    .sites-hero-text h1 {
+        font-size: 32px;
+        letter-spacing: -1.2px;
+    }
+
+    .hero-badge {
+        max-width: 100%;
+        font-size: 9px;
+        letter-spacing: 1px;
+    }
+
+    .service-card,
+    .product-card,
+    .portfolio-card,
+    .deliver-card,
+    .why-site-card,
+    .site-type-card {
+        padding: 18px;
+    }
+}
