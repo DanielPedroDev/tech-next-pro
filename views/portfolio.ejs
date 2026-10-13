@@ -99,6 +99,39 @@
             .portfolio-page-hero { padding:125px 0 75px; }
             .portfolio-hero-content h1 { letter-spacing:-2.5px; }
         }
+
+        /* Prévia visual dos projetos: painéis ilustrativos, sem dados reais */
+        .project-preview { min-height: 270px; position: relative; isolation: isolate; }
+        .project-preview::before {
+            content: ""; position: absolute; inset: 54px 22px 20px;
+            border: 1px solid rgba(0,217,255,.18); border-radius: 12px;
+            background: linear-gradient(145deg,rgba(6,19,34,.96),rgba(2,7,13,.96));
+            box-shadow: 0 16px 35px rgba(0,0,0,.28);
+            z-index: -1;
+        }
+        .project-preview .preview-top { position: relative; z-index: 1; }
+        .project-preview .preview-icon { position: relative; z-index: 1; }
+        .project-preview .preview-title { position: relative; z-index: 1; text-shadow: 0 2px 15px rgba(0,0,0,.55); }
+        .project-preview.system::after, .project-preview.collect::after, .project-preview.web::after {
+            content: ""; position: absolute; right: 36px; top: 82px; width: 37%; height: 78px;
+            border: 1px solid rgba(0,217,255,.2); border-radius: 8px;
+            background: linear-gradient(90deg,rgba(0,119,255,.14) 0 28%,transparent 28% 33%,rgba(0,217,255,.12) 33% 62%,transparent 62% 67%,rgba(0,119,255,.12) 67%);
+            opacity: .9; z-index: -1;
+        }
+        .project-preview.collect::after { border-color: rgba(0,119,255,.28); background: linear-gradient(180deg,rgba(0,119,255,.17) 0 22%,transparent 22% 32%,rgba(0,217,255,.12) 32% 50%,transparent 50% 60%,rgba(0,119,255,.1) 60%); }
+        .project-preview.web::after { border-color: rgba(0,217,255,.24); background: linear-gradient(135deg,rgba(0,119,255,.22),rgba(0,217,255,.05)); }
+        .project-content { display: flex; flex-direction: column; align-items: flex-start; }
+        .project-content .tech-list { margin-bottom: 2px; }
+        .project-status { margin-top: 18px; }
+        .portfolio-visual-note { margin-top: 12px !important; font-size: 12px !important; color: #8da0b2 !important; }
+        @media(max-width:520px) {
+            .project-preview { min-height: 235px; padding: 18px; }
+            .project-preview::before { inset: 48px 16px 16px; }
+            .project-preview.system::after, .project-preview.collect::after, .project-preview.web::after { right: 27px; top: 76px; width: 34%; height: 65px; }
+            .preview-title { font-size: 22px; }
+            .project-content { padding: 22px; }
+        }
+
     </style>
 </head>
 
